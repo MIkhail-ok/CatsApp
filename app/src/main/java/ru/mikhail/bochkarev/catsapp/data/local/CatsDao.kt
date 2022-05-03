@@ -16,4 +16,7 @@ interface CatsDao {
 
 	@Query("DELETE FROM catentity")
 	suspend fun clearCats()
+
+	@Query("SELECT * FROM catentity WHERE id == :id")
+	suspend fun getCatById(id:String): List<CatEntity>
 }

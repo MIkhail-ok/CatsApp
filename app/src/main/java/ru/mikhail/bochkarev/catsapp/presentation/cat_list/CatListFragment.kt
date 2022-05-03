@@ -23,7 +23,9 @@ class CatListFragment : Fragment() {
 	private lateinit var viewModel: CatListViewModel
 
 	private val adapter by lazy {
-		CatListAdapter()
+		CatListAdapter(
+			onCatItemClick = viewModel::onCatListClicked
+		)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {

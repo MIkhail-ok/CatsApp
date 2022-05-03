@@ -5,5 +5,6 @@ import ru.mikhail.bochkarev.catsapp.presentation.cat_list.model.CatListItemUiMod
 
 fun CatModel.toCatListItemUiModel(): CatListItemUiModel =
 	CatListItemUiModel(
+		id=id,
 		imageUrl = imageUrl
 	)

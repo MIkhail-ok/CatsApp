@@ -4,7 +4,7 @@ import ru.mikhail.bochkarev.catsapp.data.local.CatEntity
 import ru.mikhail.bochkarev.catsapp.data.remote.dto.CatDto
 import ru.mikhail.bochkarev.catsapp.domain.model.CatModel
 
-fun CatDto.toCatModel(): CatModel = CatModel(imageUrl = url)
+fun CatDto.toCatModel(): CatModel = CatModel(id = id,imageUrl = url)
 
 fun CatDto.toCatEntity(): CatEntity =
 	CatEntity(
@@ -12,4 +12,4 @@ fun CatDto.toCatEntity(): CatEntity =
 		imageUrl = url
 	)
 
-fun CatEntity.toCatModel(): CatModel = CatModel(imageUrl = imageUrl)
+fun CatEntity.toCatModel(): CatModel = CatModel(id = id,imageUrl = imageUrl)

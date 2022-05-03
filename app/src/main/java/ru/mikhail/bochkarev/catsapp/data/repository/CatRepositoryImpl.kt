@@ -15,7 +15,7 @@ class CatRepositoryImpl @Inject constructor(
 
 	private val dao = database.dao
 
-	override suspend fun getCat(loadFromRemote: Boolean): List<CatModel> {
+	override suspend fun getCats(loadFromRemote: Boolean): List<CatModel> {
 
 		val dbCats = dao.getCats()
 
@@ -26,5 +26,10 @@ class CatRepositoryImpl @Inject constructor(
 		}
 
 		return dao.getCats().map { it.toCatModel() }
+	}
+
+	override suspend fun getCatById(id: String): CatModel {
+		return dao.getCatById(id).first().toCatModel()
+
 	}
 }

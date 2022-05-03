@@ -7,12 +7,25 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.mikhail.bochkarev.catsapp.CatsApp
 import ru.mikhail.bochkarev.catsapp.databinding.FragmentCatDetailsBinding
 import ru.mikhail.bochkarev.catsapp.presentation.cat_details.adapter.CatDetailsAdapter
+import ru.mikhail.bochkarev.catsapp.presentation.cat_details.model.CatDetailsParameters
 import javax.inject.Inject
 
 class CatDetailsFragment : Fragment() {
+	companion object{
+		private const val EXTRA_PARAMS = "extra_params"
+
+		fun getNewInstance(params: CatDetailsParameters):CatDetailsFragment{
+			return CatDetailsFragment().apply {
+				arguments=Bundle().apply {
+					putParcelable(EXTRA_PARAMS,params)
+				}
+			}
+		}
+	}
 
 	@Inject
 	lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -58,12 +71,15 @@ class CatDetailsFragment : Fragment() {
 
 	private fun initContentList() {
 		binding.vContent.adapter = adapter
-		val layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+		val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 		binding.vContent.layoutManager = layoutManager
 	}
 
 	private fun configureDI() {
-		val component = CatsApp.instance.appComponent.catDetailsComponent.create()
+		val params = requireArguments().getParcelable<CatDetailsParameters>(EXTRA_PARAMS)
+		val component = CatsApp.instance.appComponent.catDetailsComponent.create(
+			requireNotNull(params)
+		)
 		component.inject(this)
 		viewModel = ViewModelProvider(this, viewModelFactory)[CatDetailsViewModel::class.java]
 	}

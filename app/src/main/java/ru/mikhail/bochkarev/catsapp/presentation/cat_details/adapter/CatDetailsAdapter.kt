@@ -8,6 +8,7 @@ class CatDetailsAdapter : AsyncListDifferDelegationAdapter<Any>(DiffCallback) {
 
 	init {
 		delegatesManager
+			.addDelegate(catDetailsImageAD())
 	}
 
 	private companion object DiffCallback : DiffUtil.ItemCallback<Any>() {

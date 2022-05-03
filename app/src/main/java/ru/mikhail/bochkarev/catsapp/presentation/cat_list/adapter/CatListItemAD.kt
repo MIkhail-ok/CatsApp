@@ -7,11 +7,15 @@ import ru.mikhail.bochkarev.catsapp.presentation.cat_list.model.CatListItemUiMod
 
 
 fun catListItemAD(
+	onClick: (CatListItemUiModel) -> Unit,
 ) = adapterDelegateViewBinding<CatListItemUiModel, Any, ListItemCatListBinding>(
 	{ layoutInflater, parent ->
 		ListItemCatListBinding.inflate(layoutInflater, parent, false)
 	}
 ) {
+
+	binding.vImage.setOnClickListener{onClick(item)}
+
 	bind {
 		Glide.with(itemView)
 			.load(item.imageUrl)
