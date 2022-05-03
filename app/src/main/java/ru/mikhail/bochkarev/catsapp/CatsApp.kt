@@ -4,7 +4,9 @@ import android.app.Application
 import ru.mikhail.bochkarev.catsapp.di.DaggerApplicationComponent
 
 class CatsApp : Application() {
-	val appComponent = DaggerApplicationComponent.create()
+	val appComponent = DaggerApplicationComponent
+		.factory()
+		.create(appContext = this)
 
 	companion object {
 		lateinit var instance: CatsApp

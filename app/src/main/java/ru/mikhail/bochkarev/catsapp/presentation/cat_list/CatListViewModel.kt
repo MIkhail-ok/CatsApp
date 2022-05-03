@@ -23,18 +23,21 @@ class CatListViewModel @Inject constructor(
 	val isRefreshing: LiveData<Boolean> = _isRefreshing
 
 	init {
-		getCat()
+		getCat(loadFromRemote = false)
 	}
 
 	fun refreshCats() {
 		_isRefreshing.value = true
-		getCat()
+		getCat(loadFromRemote = true)
 	}
 
-	private fun getCat() {
+	private fun getCat(loadFromRemote: Boolean) {
 		viewModelScope.launch {
 			val cats = async(Dispatchers.IO) {
-				repository.getCat().map { it.toCatListItemUiModel() }
+				repository.getCat(
+					loadFromRemote = loadFromRemote
+				)
+					.map { it.toCatListItemUiModel() }
 			}
 			_content.value = cats.await()
 			_isRefreshing.value = false
