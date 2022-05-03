@@ -42,6 +42,7 @@ class CatListFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		initUi()
 		initContentList()
 		observeViewModel()
 	}
@@ -50,6 +51,13 @@ class CatListFragment : Fragment() {
 		viewModel.content.observe(viewLifecycleOwner) { content ->
 			adapter.items = content
 		}
+		viewModel.isRefreshing.observe(viewLifecycleOwner) { isRefreshing ->
+			binding.vRefreshLayout.isRefreshing = isRefreshing
+		}
+	}
+
+	private fun initUi() {
+		binding.vRefreshLayout.setOnRefreshListener { viewModel.refreshCats() }
 	}
 
 	private fun initContentList() {
