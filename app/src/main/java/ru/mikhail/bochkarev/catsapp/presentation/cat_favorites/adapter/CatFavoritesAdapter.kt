@@ -1,16 +1,18 @@
-package ru.mikhail.bochkarev.catsapp.presentation.cat_details.adapter
+package ru.mikhail.bochkarev.catsapp.presentation.cat_favorites.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import ru.mikhail.bochkarev.catsapp.presentation.common.adapter.textAD
+import ru.mikhail.bochkarev.catsapp.presentation.cat_favorites.model.CatFavoritesItemUiModel
+import ru.mikhail.bochkarev.catsapp.presentation.cat_list.model.CatListItemUiModel
 import kotlin.jvm.internal.Intrinsics
 
-class CatDetailsAdapter : AsyncListDifferDelegationAdapter<Any>(DiffCallback) {
+class CatFavoritesAdapter(
+	onCatItemClick: (CatFavoritesItemUiModel) -> Unit,
+) : AsyncListDifferDelegationAdapter<Any>(DiffCallback) {
 
 	init {
-		delegatesManager
-			.addDelegate(catDetailsImageAD())
-			.addDelegate(textAD())
+		val addDelegate = delegatesManager
+			.addDelegate(catFavoritestemAD(onCatItemClick))
 	}
 
 	private companion object DiffCallback : DiffUtil.ItemCallback<Any>() {

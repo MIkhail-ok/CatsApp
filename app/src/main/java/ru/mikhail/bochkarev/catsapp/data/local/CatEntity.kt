@@ -7,4 +7,6 @@ import androidx.room.PrimaryKey
 data class CatEntity(
 	@PrimaryKey val id: String,
 	val imageUrl: String,
+	val width: Int,
+	val height: Int,
 )

@@ -1,6 +1,9 @@
 package ru.mikhail.bochkarev.catsapp.presentation.main_screen
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.github.terrakok.cicerone.Navigator
@@ -23,6 +26,26 @@ class MainActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityMainBinding
 
 	private val navigator: Navigator = AppNavigator(this, R.id.vFragmentContainer)
+
+	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+		val inflater: MenuInflater = menuInflater
+		inflater.inflate(R.menu.cat_options_menu,menu)
+		return true
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		return when(item.itemId){
+			R.id.cat_list ->{
+				viewModel.onMenuCatListClicked()
+				true
+			}
+			R.id.cat_favorites ->{
+				viewModel.onMenuCatFavoritesClicked()
+				true
+			}
+			else -> super.onOptionsItemSelected(item)
+		}
+	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		configureDI()

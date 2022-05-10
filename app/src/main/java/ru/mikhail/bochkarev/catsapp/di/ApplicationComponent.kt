@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.mikhail.bochkarev.catsapp.presentation.cat_details.CatDetailsComponent
+import ru.mikhail.bochkarev.catsapp.presentation.cat_favorites.CatFavoritesComponent
 import ru.mikhail.bochkarev.catsapp.presentation.cat_list.CatListComponent
 import ru.mikhail.bochkarev.catsapp.presentation.main_screen.MainActivityComponent
 import javax.inject.Singleton
@@ -21,6 +22,7 @@ interface ApplicationComponent {
 	val mainActivityComponent: MainActivityComponent.Factory
 	val catListComponent: CatListComponent.Factory
 	val catDetailsComponent: CatDetailsComponent.Factory
+	val catFavoritesComponent: CatFavoritesComponent.Factory
 
 	@Component.Factory
 	interface Factory {

@@ -1,14 +1,17 @@
 package ru.mikhail.bochkarev.catsapp.presentation.cat_details
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.mikhail.bochkarev.catsapp.CatsApp
+import ru.mikhail.bochkarev.catsapp.R
 import ru.mikhail.bochkarev.catsapp.databinding.FragmentCatDetailsBinding
 import ru.mikhail.bochkarev.catsapp.presentation.cat_details.adapter.CatDetailsAdapter
 import ru.mikhail.bochkarev.catsapp.presentation.cat_details.model.CatDetailsParameters
@@ -64,9 +67,25 @@ class CatDetailsFragment : Fragment() {
 		viewModel.content.observe(viewLifecycleOwner) { content ->
 			adapter.items = content
 		}
+		viewModel.isFavorite.observe(viewLifecycleOwner) { isFavorite ->
+			if (isFavorite){
+				binding.vFavoriteButton.setImageDrawable(ContextCompat.getDrawable(
+					requireContext(),
+					R.drawable.ic_favorite_selected
+					)
+				)
+			}else{
+				binding.vFavoriteButton.setImageDrawable(ContextCompat.getDrawable(
+					requireContext(),
+					R.drawable.ic_favorite
+					)
+				)
+			}
+		}
 	}
 
 	private fun initUi() {
+		binding.vFavoriteButton.setOnClickListener{ viewModel.onFavoriteButtonClicked()}
 	}
 
 	private fun initContentList() {
