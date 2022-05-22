@@ -1,12 +1,11 @@
 package ru.mikhail.bochkarev.catsapp.presentation.cat_favorites
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ru.mikhail.bochkarev.catsapp.domain.repository.CatRepository
 import ru.mikhail.bochkarev.catsapp.presentation.Screens
@@ -20,8 +19,8 @@ class CatFavouritesViewModel @Inject constructor(
 	private val router: Router,
 ) : ViewModel() {
 
-	private var _content = MutableLiveData<List<CatFavouritesItemUiModel>>()
-	val content: LiveData<List<CatFavouritesItemUiModel>> = _content
+	//private var _content = MutableLiveData<List<CatFavouritesItemUiModel>>()
+	val content: LiveData<List<CatFavouritesItemUiModel>> = getCats().asLiveData()
 
 	init {
 		getCats()
@@ -32,9 +31,9 @@ class CatFavouritesViewModel @Inject constructor(
 		router.navigateTo(Screens.CatDetails(parameters = parameters))
 	}
 
-	private fun getCats() {
-		viewModelScope.launch {
-			_content.value = repository.getAllFavouriteCats().map { it.toCatFavouritesItemUiModel() }
+	private fun getCats():Flow<List<CatFavouritesItemUiModel>> {
+		return repository
+			.getAllFavouriteCats()
+			.map { list ->list.map { it.toCatFavouritesItemUiModel() } }
 		}
 	}
-}

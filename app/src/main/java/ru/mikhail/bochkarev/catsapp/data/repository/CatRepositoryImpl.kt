@@ -1,5 +1,7 @@
 package ru.mikhail.bochkarev.catsapp.data.repository
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ru.mikhail.bochkarev.catsapp.data.local.CatsDatabase
 import ru.mikhail.bochkarev.catsapp.data.mapper.toCatEntity
 import ru.mikhail.bochkarev.catsapp.data.mapper.toCatFavouritesEntity
@@ -46,7 +48,7 @@ class CatRepositoryImpl @Inject constructor(
 		dao.deleteFavouriteCat(catModel.toCatFavouritesEntity())
 	}
 
-	override suspend fun getAllFavouriteCats(): List<CatModel> {
-		return dao.getAllFavouritesCats().map { it.toCatModel() }
+	override fun getAllFavouriteCats(): Flow<List<CatModel>> {
+		return dao.getAllFavouritesCats().map { list -> list.map { it.toCatModel() } }
 	}
 }

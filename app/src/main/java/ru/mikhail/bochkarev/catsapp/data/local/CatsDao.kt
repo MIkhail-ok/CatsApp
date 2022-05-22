@@ -1,6 +1,8 @@
 package ru.mikhail.bochkarev.catsapp.data.local
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface CatsDao {
@@ -24,7 +26,7 @@ interface CatsDao {
 	suspend fun getFavouriteCat(id: String): List<CatFavouritesEntity>
 
 	@Query("SELECT * FROM catfavouritesentity")
-	suspend fun getAllFavouritesCats(): List<CatFavouritesEntity>
+	 fun getAllFavouritesCats(): Flow<List<CatFavouritesEntity>>
 
 	@Delete
 	suspend fun deleteFavouriteCat(cat: CatFavouritesEntity)

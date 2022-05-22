@@ -1,5 +1,6 @@
 package ru.mikhail.bochkarev.catsapp.domain.repository
 
+import kotlinx.coroutines.flow.Flow
 import ru.mikhail.bochkarev.catsapp.domain.model.CatModel
 
 interface CatRepository {
@@ -10,5 +11,5 @@ interface CatRepository {
 	suspend fun isFavourite(catModel: CatModel): Boolean
 	suspend fun addToFavourite(catModel: CatModel)
 	suspend fun deleteFromFavourite(catModel: CatModel)
-	suspend fun getAllFavouriteCats(): List<CatModel>
+	 fun getAllFavouriteCats(): Flow<List<CatModel>>
 }
