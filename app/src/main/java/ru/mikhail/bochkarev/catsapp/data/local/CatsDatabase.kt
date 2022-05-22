@@ -5,7 +5,8 @@ import androidx.room.RoomDatabase
 
 @Database(
 	entities = [
-		CatEntity::class
+		CatEntity::class,
+		CatFavouritesEntity::class
 	],
 	version = 1
 )

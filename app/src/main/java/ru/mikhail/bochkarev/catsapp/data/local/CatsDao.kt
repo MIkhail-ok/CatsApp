@@ -1,9 +1,6 @@
 package ru.mikhail.bochkarev.catsapp.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface CatsDao {
@@ -18,5 +15,17 @@ interface CatsDao {
 	suspend fun clearCats()
 
 	@Query("SELECT * FROM catentity WHERE id == :id")
-	suspend fun getCatById(id:String): List<CatEntity>
+	suspend fun getCatById(id: String): List<CatEntity>
+
+	@Insert(onConflict = OnConflictStrategy.REPLACE)
+	suspend fun insertFavouriteCat(cat: CatFavouritesEntity)
+
+	@Query("SELECT * FROM catfavouritesentity WHERE id == :id")
+	suspend fun getFavouriteCat(id: String): List<CatFavouritesEntity>
+
+	@Query("SELECT * FROM catfavouritesentity")
+	suspend fun getAllFavouritesCats(): List<CatFavouritesEntity>
+
+	@Delete
+	suspend fun deleteFavouriteCat(cat: CatFavouritesEntity)
 }

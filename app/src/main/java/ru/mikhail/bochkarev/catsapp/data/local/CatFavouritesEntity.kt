@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class CatEntity(
+data class CatFavouritesEntity(
 	@PrimaryKey val id: String,
 	val imageUrl: String,
 	val height: Int,

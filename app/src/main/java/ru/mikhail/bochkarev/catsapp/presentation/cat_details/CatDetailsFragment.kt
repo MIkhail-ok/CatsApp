@@ -4,24 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.mikhail.bochkarev.catsapp.CatsApp
+import ru.mikhail.bochkarev.catsapp.R
 import ru.mikhail.bochkarev.catsapp.databinding.FragmentCatDetailsBinding
 import ru.mikhail.bochkarev.catsapp.presentation.cat_details.adapter.CatDetailsAdapter
 import ru.mikhail.bochkarev.catsapp.presentation.cat_details.model.CatDetailsParameters
 import javax.inject.Inject
 
 class CatDetailsFragment : Fragment() {
-	companion object{
+	companion object {
 		private const val EXTRA_PARAMS = "extra_params"
 
-		fun getNewInstance(params: CatDetailsParameters):CatDetailsFragment{
+		fun getNewInstance(params: CatDetailsParameters): CatDetailsFragment {
 			return CatDetailsFragment().apply {
-				arguments=Bundle().apply {
-					putParcelable(EXTRA_PARAMS,params)
+				arguments = Bundle().apply {
+					putParcelable(EXTRA_PARAMS, params)
 				}
 			}
 		}
@@ -64,9 +65,27 @@ class CatDetailsFragment : Fragment() {
 		viewModel.content.observe(viewLifecycleOwner) { content ->
 			adapter.items = content
 		}
+		viewModel.isFavourite.observe(viewLifecycleOwner) { isFavourite ->
+			if (isFavourite) {
+				binding.vFavouriteButton.setImageDrawable(
+					ContextCompat.getDrawable(
+						requireContext(),
+						R.drawable.ic_favourite_selected
+					)
+				)
+			} else {
+				binding.vFavouriteButton.setImageDrawable(
+					ContextCompat.getDrawable(
+						requireContext(),
+						R.drawable.ic_favourite
+					)
+				)
+			}
+		}
 	}
 
 	private fun initUi() {
+		binding.vFavouriteButton.setOnClickListener { viewModel.onFavouriteButtonClicked() }
 	}
 
 	private fun initContentList() {

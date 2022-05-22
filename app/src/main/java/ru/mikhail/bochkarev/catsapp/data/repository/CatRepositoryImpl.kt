@@ -2,6 +2,7 @@ package ru.mikhail.bochkarev.catsapp.data.repository
 
 import ru.mikhail.bochkarev.catsapp.data.local.CatsDatabase
 import ru.mikhail.bochkarev.catsapp.data.mapper.toCatEntity
+import ru.mikhail.bochkarev.catsapp.data.mapper.toCatFavouritesEntity
 import ru.mikhail.bochkarev.catsapp.data.mapper.toCatModel
 import ru.mikhail.bochkarev.catsapp.data.remote.CatApi
 import ru.mikhail.bochkarev.catsapp.domain.model.CatModel
@@ -29,7 +30,23 @@ class CatRepositoryImpl @Inject constructor(
 	}
 
 	override suspend fun getCatById(id: String): CatModel {
-		return dao.getCatById(id).first().toCatModel()
+		return dao.getCatById(id).firstOrNull()?.toCatModel() ?:
+		dao.getFavouriteCat(id).first().toCatModel()
+	}
 
+	override suspend fun isFavourite(catModel: CatModel): Boolean {
+		return dao.getFavouriteCat(catModel.id).isNotEmpty()
+	}
+
+	override suspend fun addToFavourite(catModel: CatModel) {
+		dao.insertFavouriteCat(catModel.toCatFavouritesEntity())
+	}
+
+	override suspend fun deleteFromFavourite(catModel: CatModel) {
+		dao.deleteFavouriteCat(catModel.toCatFavouritesEntity())
+	}
+
+	override suspend fun getAllFavouriteCats(): List<CatModel> {
+		return dao.getAllFavouritesCats().map { it.toCatModel() }
 	}
 }
