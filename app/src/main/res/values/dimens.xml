@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="offset8">8dp</dimen>
+    <dimen name="offset16">16dp</dimen>
+    <dimen name="offset24">24dp</dimen>
+
+    <dimen name="favorite_button_size">50dp</dimen>
+    <dimen name="cat_list_item_height">100dp</dimen>
+    <dimen name="cat_list_item_corner_radius">16dp</dimen>
+</resources>

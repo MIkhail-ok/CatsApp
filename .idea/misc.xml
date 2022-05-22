@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/1/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/tranparent_forground_ripple.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/CatsApp/app/src/main/res/layout/fragment_cat_details.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/CatsApp/app/src/main/res/layout/list_item_cat_list.xml" value="0.1" />
         <entry key="..\:/Users/Mikhail/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.1715" />
         <entry key="..\:/Users/Mikhail/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/ic_favourite.xml" value="0.1715" />
         <entry key="..\:/Users/Mikhail/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/ic_favourite_selected.xml" value="0.1715" />

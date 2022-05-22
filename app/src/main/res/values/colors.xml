@@ -9,4 +9,5 @@
 	<color name="white">#FFFFFFFF</color>
 
 	<color name="favourite_active">#AC871A</color>
+	<color name="white_20_percent">#33FFFFFF</color>
 </resources>

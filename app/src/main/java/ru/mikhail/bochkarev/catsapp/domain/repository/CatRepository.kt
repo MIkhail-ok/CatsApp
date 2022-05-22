@@ -11,5 +11,5 @@ interface CatRepository {
 	suspend fun isFavourite(catModel: CatModel): Boolean
 	suspend fun addToFavourite(catModel: CatModel)
 	suspend fun deleteFromFavourite(catModel: CatModel)
-	 fun getAllFavouriteCats(): Flow<List<CatModel>>
+	fun getAllFavouriteCats(): Flow<List<CatModel>>
 }

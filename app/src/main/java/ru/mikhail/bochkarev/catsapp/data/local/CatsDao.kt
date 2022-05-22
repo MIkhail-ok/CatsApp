@@ -26,7 +26,7 @@ interface CatsDao {
 	suspend fun getFavouriteCat(id: String): List<CatFavouritesEntity>
 
 	@Query("SELECT * FROM catfavouritesentity")
-	 fun getAllFavouritesCats(): Flow<List<CatFavouritesEntity>>
+	fun getAllFavouritesCats(): Flow<List<CatFavouritesEntity>>
 
 	@Delete
 	suspend fun deleteFavouriteCat(cat: CatFavouritesEntity)

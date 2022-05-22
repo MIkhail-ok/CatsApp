@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import ru.mikhail.bochkarev.catsapp.CatsApp
 import ru.mikhail.bochkarev.catsapp.databinding.FragmentCatListBinding
 import ru.mikhail.bochkarev.catsapp.presentation.cat_list.adapter.CatListAdapter
+import ru.mikhail.bochkarev.catsapp.presentation.cat_list.adapter.CatListDecoration
 import javax.inject.Inject
 
 class CatListFragment : Fragment() {
@@ -66,6 +67,7 @@ class CatListFragment : Fragment() {
 		binding.vContent.adapter = adapter
 		val layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 		binding.vContent.layoutManager = layoutManager
+		binding.vContent.addItemDecoration(CatListDecoration(resources))
 	}
 
 	private fun configureDI() {
